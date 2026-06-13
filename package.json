@@ -1,0 +1,20 @@
+{
+  "name": "ai-resume-portfolio-builder",
+  "version": "1.0.0",
+  "description": "AI-powered tool that generates personalized resumes, cover letters, and professional portfolios",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "setup": "cd backend && npx prisma generate && npx prisma db push"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

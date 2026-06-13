@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String         @id @default(cuid())
+  email        String         @unique
+  name         String
+  passwordHash String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  profile      StudentProfile?
+  resumes      Resume[]
+  coverLetters CoverLetter[]
+  portfolios   Portfolio[]
+}
+
+model StudentProfile {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title          String   @default("")
+  summary        String   @default("")
+  phone          String   @default("")
+  location       String   @default("")
+  linkedin       String   @default("")
+  github         String   @default("")
+  website        String   @default("")
+  skills         String   @default("[]")    // JSON array of strings
+  education      String   @default("[]")    // JSON array of education objects
+  experience     String   @default("[]")    // JSON array of experience objects
+  projects       String   @default("[]")    // JSON array of project objects
+  certifications String   @default("[]")    // JSON array of certification objects
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Resume {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title        String
+  content      String   // JSON — structured resume data
+  templateType String   @default("modern")
+  atsScore     Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model CoverLetter {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobTitle       String
+  company        String
+  jobDescription String   @default("")
+  content        String   // The generated cover letter text
+  tone           String   @default("formal")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Portfolio {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title       String
+  theme       String    @default("developer")
+  sections    String    // JSON — portfolio section configuration
+  htmlContent String    @default("")  // Generated HTML
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
