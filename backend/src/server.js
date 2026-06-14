@@ -31,6 +31,13 @@ app.get('/api/health', (req, res) => {
     llmProvider: process.env.LLM_PROVIDER || 'demo'
   });
 });
+app.get('/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    llmProvider: process.env.LLM_PROVIDER || 'demo'
+  });
+});
 
 app.get("/", (req, res) => {
   res.json({
@@ -40,10 +47,19 @@ app.get("/", (req, res) => {
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
+
 app.use('/api/profiles', profileRoutes);
+app.use('/profiles', profileRoutes);
+
 app.use('/api/resumes', resumeRoutes);
+app.use('/resumes', resumeRoutes);
+
 app.use('/api/cover-letters', coverLetterRoutes);
+app.use('/cover-letters', coverLetterRoutes);
+
 app.use('/api/portfolios', portfolioRoutes);
+app.use('/portfolios', portfolioRoutes);
 
 // Global error handler
 app.use((err, req, res, next) => {
