@@ -27,6 +27,10 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+app.get("/", (req, res) => {
+  res.send("AI Resume Builder Backend is Running");
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/profiles', profileRoutes);
@@ -55,8 +59,6 @@ app.listen(PORT, () => {
   console.log(`🤖 LLM Provider: ${process.env.LLM_PROVIDER || 'demo'}\n`);
 });
 
-app.get("/", (req, res) => {
-  res.send("AI Resume Builder Backend is Running");
-});
+
 
 module.exports = app;
