@@ -28,7 +28,9 @@ app.get('/api/health', (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("AI Resume Builder Backend is Running");
+  res.json({
+    message: "AI Resume Builder Backend Running"
+  });
 });
 
 // Routes
