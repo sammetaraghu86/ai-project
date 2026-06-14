@@ -55,4 +55,8 @@ app.listen(PORT, () => {
   console.log(`🤖 LLM Provider: ${process.env.LLM_PROVIDER || 'demo'}\n`);
 });
 
+app.get("/", (req, res) => {
+  res.send("AI Resume Builder Backend is Running");
+});
+
 module.exports = app;

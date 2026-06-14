@@ -1,0 +1,10 @@
+feat: AI Resume and Portfolio Builder - Full MVP
+
+- Next.js 16 frontend with premium dark theme and glassmorphism UI
+- Express.js backend with Prisma/SQLite database
+- AI-powered resume generation with ATS scoring and PDF export
+- Cover letter generator with 3 tone options
+- Portfolio builder with 4 visual themes and HTML export
+- JWT authentication with auto profile creation
+- Demo mode works without API keys
+- OpenAI GPT-4o integration ready
